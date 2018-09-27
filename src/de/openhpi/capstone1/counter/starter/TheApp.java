@@ -9,9 +9,13 @@ public class TheApp extends PApplet {
 
 	InteractiveComponent interactiveCounter;
 
-	float bx;
+	
+//	float bx;
 	int boxH = 20;
 	int boxW = 100;
+	
+	float bx = map(mouseX, 0, width, 0, width - boxW);
+	
 	boolean overBox = false;
 	boolean locked = false;
 	float xOffset = (float) 0.0;
@@ -57,10 +61,15 @@ public class TheApp extends PApplet {
 		fill(255);
 		// rect(random(100),random(100), 10, 10);
 		interactiveCounter.update();
+		
+		
+
+		float  x1 = map(mouseX, 0, width, 0, width - boxW);
+		rect(x1, 270, boxW, boxH);
 
 		
 		
-		
+		/*
 		// Test if the cursor is over the box
 		if (mouseX > bx && mouseX < bx + boxW && mouseY > 270 && mouseY < 270 + boxH) {
 //		if (mouseX > bx - boxSize && mouseX < bx + boxSize) {
@@ -77,7 +86,7 @@ public class TheApp extends PApplet {
 
 		// Draw the box
 		rect(bx, 270, boxW, boxH);
-
+		*/
 		
 		
 		
@@ -92,7 +101,8 @@ public class TheApp extends PApplet {
 		// If it does, reverse its direction by multiplying by -1
 		
 		
-		if (ypos > 270 - rad && bx <= xpos && xpos <= bx + 100) {
+//		if (ypos > 270 - rad && bx <= xpos && xpos <= bx + 100) {
+		if (ypos > 270 - rad && x1 <= xpos && xpos <= x1 + 100) {
 			ydirection *= -1;	
 		}
 		
@@ -113,11 +123,9 @@ public class TheApp extends PApplet {
 		// Draw the shape
 		ellipse(xpos, ypos, rad, rad);
 		
-		
-		
-
 	}
 
+/*
 	@Override
 	public void mouseClicked() {
 		interactiveCounter.handleEvent();
@@ -129,18 +137,17 @@ public class TheApp extends PApplet {
 		if (locked) {
 			bx = mouseX - xOffset;
 		}
-		//if (locked) {
-		//	if (bx < 200 && bx>0) {
-		//		bx = mouseX - xOffset;
-		//	}
-		//	else if(bx >200) {
-		//		bx = 200;
-		//	}
-		//	else {
-		//		bx=0;
-		//	}
-		//	
-		//}
+//		if (locked) {
+//			if (bx < 200 && bx>0) {
+//				bx = mouseX - xOffset;
+//			}
+//			else if(bx > 200 ) {
+//				bx = mouseX;
+//			}
+//			else { //when bx < 0
+//				bx  = mouseX;
+//			}
+//		}
 
 	}
 
@@ -161,6 +168,7 @@ public class TheApp extends PApplet {
 		locked = false;
 	}
 	
+*/
 	
 
 }
