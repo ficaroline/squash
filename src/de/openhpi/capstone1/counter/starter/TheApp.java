@@ -10,7 +10,6 @@ public class TheApp extends PApplet {
 	InteractiveComponent interactiveCounter;
 
 	float bx;
-	float by;
 	int boxH = 20;
 	int boxW = 100;
 	boolean overBox = false;
@@ -126,18 +125,22 @@ public class TheApp extends PApplet {
 
 	@Override
 	public void mouseDragged() {
-		if (locked) {
-			if (bx < 200 && bx>0) {
-				bx = mouseX - xOffset;
-			}
-			else if(bx >200) {
-				bx = 200;
-			}
-			else {
-				bx=0;
-			}
-			
-		}
+		if(locked) {
+		    bx = mouseX-xOffset; 
+
+		 }
+//		if (locked) {
+//			if (bx < 200 && bx>0) {
+//				bx = mouseX - xOffset;
+//			}
+//			else if(bx >200) {
+//				bx = 200;
+//			}
+//			else {
+//				bx=0;
+//			}
+//			
+//		}
 	}
 
 	@Override
