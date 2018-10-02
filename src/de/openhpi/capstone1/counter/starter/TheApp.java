@@ -9,7 +9,7 @@ public class TheApp extends PApplet {
 
 	InteractiveComponent interactiveCounter;
 
-	
+	int hochz, hochz2;
 //	float bx;
 	int boxH = 20;
 	int boxW = 100;
@@ -24,8 +24,8 @@ public class TheApp extends PApplet {
 	int rad = 10; // Width of the shape
 	float xpos, ypos; // Starting position of shape
 
-	float xspeed = (float) 2.8; // Speed of the shape
-	float yspeed = (float) 2.2; // Speed of the shape
+	float xspeed = (float) 2.5; // Speed of the shape
+//	float yspeed = (float) 2.5; // Speed of the shape
 
 	int xdirection = 1; // Left or Right
 	int ydirection = 1; // Top to Bottom
@@ -40,9 +40,9 @@ public class TheApp extends PApplet {
 		noStroke();
 
 		frameRate(30);
-		InteractiveCounterBuilder builder = new InteractiveCounterBuilder();
-		GUIComponent.construct(this, builder);
-		interactiveCounter = builder.getComponent();
+//		InteractiveCounterBuilder builder = new InteractiveCounterBuilder();
+//		GUIComponent.construct(this, builder);
+//		interactiveCounter = builder.getComponent();
 
 		bx = width / 2 - boxW /2;
 
@@ -57,51 +57,31 @@ public class TheApp extends PApplet {
 
 	@Override
 	public void draw() { // draw() loops forever, until stopped
+		
+		
+		
+		xspeed =  (float) (Math.round(xspeed * 100) / 100.0);  		
 		background(204);
+		
+		hochz++;
+		textSize(15);
+		fill(0, 102, 153);
+		text("Score: " +hochz2 + " Speed: " + xspeed, 10, 30); 
+		
+		if (ypos != 350) hochz2 = (int) hochz/10;				
+		if (hochz2%2==0 && ypos != 350) xspeed+=0.01;
+				
 		fill(255);
-		// rect(random(100),random(100), 10, 10);
-		interactiveCounter.update();
-		
-		
+//		interactiveCounter.update();
 
 		float  x1 = map(mouseX, 0, width, 0, width - boxW);
 		rect(x1, 270, boxW, boxH);
-
-		
-		
-		/*
-		// Test if the cursor is over the box
-		if (mouseX > bx && mouseX < bx + boxW && mouseY > 270 && mouseY < 270 + boxH) {
-//		if (mouseX > bx - boxSize && mouseX < bx + boxSize) {
-			overBox = true;
-			if (!locked) {
-				stroke(255);
-				fill(153);
-			}
-		} else {
-			stroke(153);
-			fill(153);
-			overBox = false;
-		}
-
-		// Draw the box
-		rect(bx, 270, boxW, boxH);
-		*/
-		
-		
-		
+	
 		// Update the position of the shape
 		xpos = xpos + (xspeed * xdirection);
-		ypos = ypos + (yspeed * ydirection);
-		
-//		xpos = xpos + (5* xdirection);
-//		ypos = ypos + (5* ydirection);
+		ypos = ypos + (xspeed * ydirection);
+//		ypos = ypos + (yspeed * ydirection);
 
-		// Test to see if the shape exceeds the boundaries of the screen
-		// If it does, reverse its direction by multiplying by -1
-		
-		
-//		if (ypos > 270 - rad && bx <= xpos && xpos <= bx + 100) {
 		if (ypos > 270 - rad && x1 <= xpos && xpos <= x1 + 100) {
 			ydirection *= -1;	
 		}
@@ -115,60 +95,11 @@ public class TheApp extends PApplet {
 		if (ypos > 300 - rad ) {
 			xpos = 350;
 			ypos = 350;
-//			fill(204);
 		}
-		
-	
 
-		// Draw the shape
 		ellipse(xpos, ypos, rad, rad);
 		
-	}
-
-/*
-	@Override
-	public void mouseClicked() {
-		interactiveCounter.handleEvent();
-	}
-
-	@Override
-	public void mouseDragged() {
-
-		if (locked) {
-			bx = mouseX - xOffset;
-		}
-//		if (locked) {
-//			if (bx < 200 && bx>0) {
-//				bx = mouseX - xOffset;
-//			}
-//			else if(bx > 200 ) {
-//				bx = mouseX;
-//			}
-//			else { //when bx < 0
-//				bx  = mouseX;
-//			}
-//		}
 
 	}
-
-	@Override
-	public void mousePressed() {
-		if (overBox) {
-			locked = true;
-			fill(255, 255, 255);
-		} else {
-			locked = false;
-		}
-		xOffset = mouseX - bx;
-
-	}
-
-	@Override
-	public void mouseReleased() {
-		locked = false;
-	}
-	
-*/
-	
 
 }
